@@ -1,7 +1,28 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import Global from "./Global";
 
 export default class MenuDepartamentos extends Component {
+  state = {
+    departamentos: [],
+  };
+
+  loadDepartamentos = () => {
+    let request = "api/departamentos";
+    let url = Global.apiDepartamentos + request;
+    axios.get(url).then((response) => {
+      console.log("leyendo departamentos");
+      this.setState({
+        departamentos: response.data,
+      });
+    });
+  };
+
+  componentDidMount = () => {
+    this.loadDepartamentos();
+  };
+
   render() {
     return (
       <div>
@@ -41,11 +62,11 @@ export default class MenuDepartamentos extends Component {
                     Detalles
                   </NavLink>
                 </li>
-                {/* <li className="nav-item">
-                  <NavLink className="nav-link" to="/update">
-                    Update
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/delete">
+                    Delete
                   </NavLink>
-                </li> */}
+                </li>
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
@@ -56,21 +77,18 @@ export default class MenuDepartamentos extends Component {
                     Dropdown
                   </a>
                   <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
-                    </li>
+                    {this.state.departamentos.map((dep, index) => {
+                      return (
+                        <li key={index}>
+                          <NavLink
+                            className="dropdown-item"
+                            to={"/detalle/" + dep.numero}
+                          >
+                            {dep.nombre}
+                          </NavLink>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </li>
               </ul>

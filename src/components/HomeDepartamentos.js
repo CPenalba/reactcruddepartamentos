@@ -22,15 +22,6 @@ export default class HomeDepartamentos extends Component {
     });
   };
 
-  deleteDepartamento = (idDepartamento) => {
-    let request = "api/departamentos/" + idDepartamento;
-    let url = Global.apiDepartamentos + request;
-    axios.delete(url).then((response) => {
-      console.log("Delete...");
-      this.loadDepartamentos();
-    });
-  };
-
   componentDidMount = () => {
     this.loadDepartamentos();
   };
@@ -72,14 +63,12 @@ export default class HomeDepartamentos extends Component {
                     <td>{dep.nombre}</td>
                     <td>{dep.localidad}</td>
                     <td>
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => {
-                          this.deleteDepartamento(dep.numero);
-                        }}
+                      <NavLink
+                        to={"/delete/" + dep.numero}
+                        className="btn btn-dark"
                       >
                         Delete
-                      </button>
+                      </NavLink>
                     </td>
                     <td>
                       <NavLink
