@@ -40,7 +40,14 @@ export default class DetalleDepartamento extends Component {
             </li>
           </ul>
         ) : (
-          <img src={loadingImage} />
+          <img src={loadingImage}
+          alt="Loading..."
+          style={{
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+            marginTop: "5%",
+          }} />
         )}
       </div>
     );

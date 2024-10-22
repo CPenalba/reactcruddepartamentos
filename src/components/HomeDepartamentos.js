@@ -21,6 +21,16 @@ export default class HomeDepartamentos extends Component {
       });
     });
   };
+
+  deleteDepartamento = (idDepartamento) => {
+    let request = "api/departamentos/" + idDepartamento;
+    let url = Global.apiDepartamentos + request;
+    axios.delete(url).then((response) => {
+      console.log("Delete...");
+      this.loadDepartamentos();
+    });
+  };
+
   componentDidMount = () => {
     this.loadDepartamentos();
   };
@@ -49,7 +59,9 @@ export default class HomeDepartamentos extends Component {
                 <th>Id departamentos</th>
                 <th>Nombre</th>
                 <th>Localidad</th>
-                <th></th>
+                <th>Eliminar</th>
+                <th>Detalles</th>
+                <th>Actualizar</th>
               </tr>
             </thead>
             <tbody>
@@ -59,7 +71,39 @@ export default class HomeDepartamentos extends Component {
                     <td>{dep.numero}</td>
                     <td>{dep.nombre}</td>
                     <td>{dep.localidad}</td>
-                    <td><NavLink to={"/detalle/" + dep.numero}>Detalles</NavLink></td>
+                    <td>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => {
+                          this.deleteDepartamento(dep.numero);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                    <td>
+                      <NavLink
+                        to={"/detalle/" + dep.numero}
+                        className="btn btn-info"
+                      >
+                        Detalles
+                      </NavLink>
+                    </td>
+                    <td>
+                      <NavLink
+                        to={
+                          "/update/" +
+                          dep.numero +
+                          "/" +
+                          dep.nombre +
+                          "/" +
+                          dep.localidad
+                        }
+                        className="btn btn-danger"
+                      >
+                        Update
+                      </NavLink>
+                    </td>
                   </tr>
                 );
               })}

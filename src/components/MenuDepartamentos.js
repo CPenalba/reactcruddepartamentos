@@ -27,7 +27,7 @@ export default class MenuDepartamentos extends Component {
             <div className="collapse navbar-collapse" id="navbarsExample03">
               <ul className="navbar-nav me-auto mb-2 mb-sm-0">
                 <li className="nav-item">
-                  <NavLink className="nav-link"  to="/">
+                  <NavLink className="nav-link" to="/">
                     Home
                   </NavLink>
                 </li>
@@ -41,6 +41,11 @@ export default class MenuDepartamentos extends Component {
                     Detalles
                   </NavLink>
                 </li>
+                {/* <li className="nav-item">
+                  <NavLink className="nav-link" to="/update">
+                    Update
+                  </NavLink>
+                </li> */}
                 <li className="nav-item dropdown">
                   <a
                     className="nav-link dropdown-toggle"
